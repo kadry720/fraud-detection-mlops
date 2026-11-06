@@ -1,9 +1,44 @@
-# End-to-End MLOps Pipeline for Fraud Detection
+# Fraud Detection: End-to-End MLOps Pipeline
 
-DDSC611 final-year MLOps project for IEEE-CIS fraud detection. The repository
-contains reproducible preprocessing, model training with MLflow, and a CI/CD data
-validation gate that blocks training or deployment when schema and quality
-expectations are violated.
+![Python](https://img.shields.io/badge/Python-3.11-3776AB?logo=python&logoColor=white)
+![MLflow](https://img.shields.io/badge/MLflow-tracking-0194E2?logo=mlflow&logoColor=white)
+![DVC](https://img.shields.io/badge/DVC-versioned-13ADC7?logo=dvc&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-serving-009688?logo=fastapi&logoColor=white)
+![Grafana](https://img.shields.io/badge/Grafana-monitoring-F46800?logo=grafana&logoColor=white)
+![GitHub Actions](https://img.shields.io/badge/CI-GitHub%20Actions-2088FF?logo=githubactions&logoColor=white)
+
+An end-to-end MLOps pipeline for fraud detection on the IEEE-CIS dataset, built as my DDSC611 final-year project at ESLSCA University. It covers reproducible preprocessing, experiment tracking, a CI/CD data-validation gate that blocks training or deployment when schema and quality expectations are violated, containerised serving, and monitoring.
+
+## Highlights
+
+- **8 model families compared** with GridSearchCV and tracked in MLflow. The best model is registered as `FraudDetectionBestModel`.
+- **Data-validation gate in CI.** Pandera schema checks, quality checks and drift tests (Kolmogorov-Smirnov, Jensen-Shannon) stop training or deployment on bad data.
+- **Serving stack in one command.** FastAPI, a Gradio UI, MLflow, Prometheus and Grafana via Docker Compose.
+- **Monitoring.** A provisioned Grafana dashboard plus Evidently baseline and drift reports.
+- **Reproducible.** DVC-versioned data and models, Prefect orchestration, and GitHub Actions running Ruff, Black, Flake8 and unit tests.
+
+## Results
+
+Evaluated on a held-out test set of 20,000 transactions (2.56% fraud). The production model is selected by F1.
+
+| Model | ROC-AUC | Avg. precision | Precision | Recall | F1 |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| **Gradient Boosting (selected)** | 0.911 | 0.681 | 0.814 | 0.580 | **0.677** |
+| Hist Gradient Boosting | 0.917 | 0.683 | 0.827 | 0.553 | 0.663 |
+| Random Forest | 0.912 | 0.716 | 0.934 | 0.496 | 0.648 |
+| Extra Trees | 0.930 | 0.749 | 0.979 | 0.465 | 0.630 |
+| Balanced Bagging | 0.893 | 0.617 | 0.740 | 0.539 | 0.624 |
+| Balanced Random Forest | 0.931 | 0.669 | 0.859 | 0.475 | 0.611 |
+| Easy Ensemble | 0.900 | 0.518 | 0.545 | 0.480 | 0.511 |
+| RUSBoost | 0.909 | 0.555 | 0.218 | 0.752 | 0.338 |
+
+Full details are in the [model card](docs/model_card.md) and [data card](docs/data_card.md).
+
+<p align="center">
+  <img src="reports/screenshots/MLFlow%20Runs.png" alt="MLflow experiment runs" width="49%">
+  <img src="reports/screenshots/Evidently%20Drift%20Report.png" alt="Evidently drift report" width="49%">
+</p>
 
 ## Quickstart
 
