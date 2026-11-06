@@ -8,7 +8,7 @@
 ![Grafana](https://img.shields.io/badge/Grafana-monitoring-F46800?logo=grafana&logoColor=white)
 ![GitHub Actions](https://img.shields.io/badge/CI-GitHub%20Actions-2088FF?logo=githubactions&logoColor=white)
 
-An end-to-end MLOps pipeline for fraud detection on the IEEE-CIS dataset, built as my DDSC611 final-year project at ESLSCA University. It covers reproducible preprocessing, experiment tracking, a CI/CD data-validation gate that blocks training or deployment when schema and quality expectations are violated, containerised serving, and monitoring.
+An end-to-end MLOps pipeline for fraud detection on the IEEE-CIS dataset, built as the DDSC611 final-year project at ESLSCA University. It covers reproducible preprocessing, experiment tracking, a CI/CD data-validation gate that blocks training or deployment when schema and quality expectations are violated, containerised serving, and monitoring.
 
 ## Highlights
 
